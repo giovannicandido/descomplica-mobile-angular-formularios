@@ -65,6 +65,10 @@ export class PessoaAddPageComponent implements OnInit {
     return this.formGroup.controls[control].getError(validor) ? true : false
   }
 
+  isFormError(validator: string) {
+    return this.formGroup.getError(validator) ? true : false
+  }
+
   formToValue(form: typeof this.formGroup): Pessoa {
     return {
       id: form.value.id!,

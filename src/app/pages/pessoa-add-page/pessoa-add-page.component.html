@@ -34,7 +34,13 @@
             <mat-hint>MM/DD/YYYY</mat-hint>
             <mat-datepicker-toggle matIconSuffix [for]="endAt"></mat-datepicker-toggle>
             <mat-datepicker #endAt></mat-datepicker>
+            <div>
+                <p class="error" *ngIf="isFormError('dateRange')">
+                    Range de datas invalido
+                </p>
+            </div>
         </mat-form-field>
+        
         <div>
             <mat-form-field appearance="fill">
                 <mat-label>CPF</mat-label>
