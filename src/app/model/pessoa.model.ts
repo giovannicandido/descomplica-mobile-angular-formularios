@@ -1,6 +1,8 @@
 export interface Pessoa {
     id?: number,
-    nome: string,
+    name: string,
+    gender: string,
     email: string,
-    hobie: string
+    hobie: string,
+    status: string
 }
