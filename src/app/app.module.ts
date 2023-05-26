@@ -13,7 +13,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { PessoaPageComponent } from './pages/pessoa-page/pessoa-page.component';
 import { PessoaAddPageComponent } from './pages/pessoa-add-page/pessoa-add-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-{}
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatMenuModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaskDirective, NgxMaskPipe
   ],
-  providers: [],
+  providers: [
+    provideNgxMask()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

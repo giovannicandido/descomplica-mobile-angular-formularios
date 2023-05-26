@@ -1,8 +1,11 @@
+import { getNumberOfCurrencyDigits } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { getMatInputUnsupportedTypeError } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 import { Pessoa } from 'src/app/model/pessoa.model';
 import { PessoaService } from 'src/app/services/pessoa.service';
+import { createPasswordStrengthValidator, createDateRangeValidator, createCPFValidator, createCNPJValidator } from 'src/app/validators';
 
 @Component({
   selector: 'app-pessoa-add-page',
@@ -21,7 +24,14 @@ export class PessoaAddPageComponent implements OnInit {
     id: this.formBuilder.control<number|null>(null),
     nome: [''],
     email: ['', Validators.compose([Validators.email, Validators.required])],
-    hobie: ['']
+    hobie: [''],
+    password: ['', createPasswordStrengthValidator()],
+    startAt: [],
+    endAt: [],
+    cpf: ['', Validators.compose([Validators.required, createCPFValidator()])],
+    cnpj: ['', Validators.compose([Validators.required, createCNPJValidator()])]
+  }, {
+    validators: [createDateRangeValidator()]
   })
 
   constructor(private formBuilder: FormBuilder, private service: PessoaService, private activeRouter: ActivatedRoute) {}
@@ -51,7 +61,7 @@ export class PessoaAddPageComponent implements OnInit {
   }
 
 
-  isError(control: 'email' | 'nome' | 'hobie', validor: string) {
+  isError(control: 'email' | 'nome' | 'hobie' | 'cpf' | 'cnpj', validor: string) {
     return this.formGroup.controls[control].getError(validor) ? true : false
   }
 

@@ -6,25 +6,82 @@
             <input matInput type="text" placeholder="Nome" name="nome" formControlName="nome" />
         </mat-form-field>
     </div>
-    
+
     <div>
-        <mat-form-field>
+        <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
             <input matInput type="text" placeholder="Email" name="email" formControlName="email" />
-           
+
         </mat-form-field>
-        <p class="error" *ngIf="isError('email', 'required')">
-            Email é obrigatório
-        </p>
-        <p class="error" *ngIf="isError('email', 'email')">
-            Não é um email válido
-        </p>
-    </div>
+        <mat-form-field appearance="fill">
+            <mat-label>Start Date</mat-label>
+            <input matInput [matDatepicker]="startAt" formControlName="startAt">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="startAt"></mat-datepicker-toggle>
+            <mat-datepicker #startAt></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="endAt" formControlName="endAt">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="endAt"></mat-datepicker-toggle>
+            <mat-datepicker #endAt></mat-datepicker>
+        </mat-form-field>
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>CPF</mat-label>
+                <input matInput type="text" placeholder="CPF" name="cpf" formControlName="cpf" />
+                <div>
+                    <p class="error" *ngIf="isError('cpf', 'cpfValidator')">
+                        Não é um cpf
+                    </p>
+                    <p class="error" *ngIf="isError('cpf', 'required')">
+                        Cpf é obrigatório
+                    </p>
+                </div>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill">
+                <mat-label>CNPJ</mat-label>
+                <input matInput type="text" formControlName="cnpj" mask="00.000.000/0000-00" />
+                <div>
     
+                    <p class="error" *ngIf="isError('cnpj', 'required')">
+                        Cnpj é obrigatório
+                    </p>
+                    <p class="error" *ngIf="isError('cnpj', 'cnpjValidator')">
+                        Não é um cnpj valido
+                    </p>
+                </div>
+            </mat-form-field>
+    
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" formControlName="startAt" />
+                <div>
+    
+                    <p class="error" *ngIf="isError('email', 'required')">
+                        Email é obrigatório
+                    </p>
+                    <p class="error" *ngIf="isError('email', 'email')">
+                        Não é um email válido
+                    </p>
+                    <p class="error" *ngIf="formGroup.getError('dateRange')">
+                        Erro nas datas
+                    </p>
+                </div>
+            </mat-form-field>
+
+            
+        </div>
+        
+
+    </div>
+
     <div>
         <mat-form-field appearance="fill">
             <mat-label>Hobie</mat-label>
-            <mat-select formControlName="hobie" >
+            <mat-select formControlName="hobie">
                 <mat-option *ngFor="let hobie of hobies" [value]="hobie">{{hobie}}</mat-option>
             </mat-select>
         </mat-form-field>
